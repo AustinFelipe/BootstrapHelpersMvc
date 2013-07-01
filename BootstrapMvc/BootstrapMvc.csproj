@@ -43,14 +43,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base\Button.cs" />
-    <Compile Include="Base\ButtonHtmlHelper.cs" />
-    <Compile Include="Base\ButtonOptions.cs" />
+    <Compile Include="Base\Button\Button.cs" />
+    <Compile Include="Components\ButtonToolbar.cs" />
+    <Compile Include="Helpers\ButtonHtmlHelper.cs" />
+    <Compile Include="Base\Button\ButtonOptions.cs" />
+    <Compile Include="Components\ButtonContainer.cs" />
+    <Compile Include="Components\ButtonGroup.cs" />
+    <Compile Include="Components\ButtonToolbarContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Base\Button\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
