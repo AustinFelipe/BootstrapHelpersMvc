@@ -6,12 +6,20 @@ namespace BootstrapMvc.Components
 {
     public class ButtonGroup : IHtmlString
     {
-        ButtonContainer buttonContainer;
+        private ButtonContainer buttonContainer;
+        private bool vertical;
 
         public ButtonGroup(Action<ButtonContainer> reference)
         {
+            vertical = false;
             buttonContainer = new ButtonContainer();
             reference(buttonContainer);
+        }
+
+        public ButtonGroup Vertical(bool vertical = false)
+        {
+            this.vertical = vertical;
+            return this;
         }
 
         private string RenderButtonGroup()
@@ -19,6 +27,9 @@ namespace BootstrapMvc.Components
             var wrapper = new TagBuilder("div");
 
             wrapper.AddCssClass("btn-group");
+
+            if (vertical)
+                wrapper.AddCssClass("btn-group-vertical");
 
             foreach (var button in buttonContainer.Buttons)
             {

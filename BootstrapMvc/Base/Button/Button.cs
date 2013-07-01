@@ -135,7 +135,11 @@ namespace BootstrapMvc.Base.Button
             wrapper.MergeAttributes(htmlAttributes != null ? HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes) : null);
 
             wrapper.Attributes.Add("type", "button");
-            wrapper.InnerHtml = text;
+
+            if (buttonTag == ButtonTag.Input)
+                wrapper.Attributes.Add("value", text);
+            else
+                wrapper.InnerHtml = text;
 
             return wrapper.ToString();
         }
