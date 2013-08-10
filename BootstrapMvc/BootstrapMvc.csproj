@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Base\Button\Button.cs" />
     <Compile Include="Components\ButtonToolbar.cs" />
+    <Compile Include="Components\DropdownMenu.cs" />
     <Compile Include="Helpers\ButtonHtmlHelper.cs" />
     <Compile Include="Base\Button\ButtonOptions.cs" />
     <Compile Include="Components\ButtonContainer.cs" />
