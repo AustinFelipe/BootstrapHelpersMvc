@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BootstrapMvc.Base.Button
 {
-    public enum ButtonType { Default, Primary, Info, Success, Warning, Danger, Inverse, Link }
-    public enum ButtonSize { Large, Default, Small, Mini }
-    public enum ButtonTag { Anchor, Button, Input }
+    public enum ButtonType { Default, Primary, Info, Success, Warning, Danger, Link }
+    public enum ButtonSize { Large, Default, Small, ExtraSmall }
+    public enum ButtonTag { Link, Button, Input }
 }
