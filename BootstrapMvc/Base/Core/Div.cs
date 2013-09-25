@@ -8,24 +8,16 @@ using System.Web.Mvc;
 
 namespace BootstrapMvc.Base.Core
 {
-    public class Div : Element<Div>, IElement, IHtmlString
+    public class Div : Element<Div>
     {
         private GridResponsive size { get; set; }
         private bool rowFluid { get; set; }
         private string divContainer;
-        private object htmlAttributes;
-        private string id;
-        private string css;
 
-        public Div()
+        public Div() 
+            : base("div")
         {
             size = GridResponsive.GridResponsiveWithoutCol();
-        }
-
-        public Div Id(string id)
-        {
-            this.id = id;
-            return this;
         }
 
         public Div Size(GridResponsive size)
@@ -46,47 +38,17 @@ namespace BootstrapMvc.Base.Core
             return this;
         }
 
-        public override Div Attributes(object htmlAttributes)
-        {
-            this.htmlAttributes = htmlAttributes;
-            return this;
-        }
-
-        public override Div AddCss(string css)
-        {
-            this.css = css;
-            return this;
-        }
-
         public override string Render()
         {
-            var wrapper = new TagBuilder("div");
-            wrapper.AddCssClass(size.ToString());
+            Wrapper.AddCssClass(size.ToString());
 
             if (rowFluid)
-                wrapper.AddCssClass("row");
+                Wrapper.AddCssClass("row");
 
-            wrapper.InnerHtml = divContainer;
+            if (!String.IsNullOrEmpty(divContainer))
+                Wrapper.InnerHtml = divContainer;
 
-            if (!String.IsNullOrEmpty(id))
-                wrapper.Attributes.Add("id", id);
-
-            wrapper.MergeAttributes(htmlAttributes != null ? HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes) : null);
-
-            if (!String.IsNullOrEmpty(css))
-                wrapper.AddCssClass(css);
-
-            return wrapper.ToString();
-        }
-
-        public override string ToString()
-        {
-            return Render();
-        }
-
-        public string ToHtmlString()
-        {
-            return ToString();
+            return base.Render();
         }
     }
 }

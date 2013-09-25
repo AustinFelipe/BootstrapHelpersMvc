@@ -5,7 +5,7 @@ using System.Web.Mvc;
 
 namespace BootstrapMvc.Base.Button
 {
-    public class Button : Element<Button>, IHtmlString, IElement
+    public class Button : Element<Button>
     {
         private readonly string text;
         private ButtonType buttonType;
@@ -14,12 +14,10 @@ namespace BootstrapMvc.Base.Button
         private bool disabled;
         private bool block;
         private bool submit;
-        private string css;
-        private object htmlAttributes;
 
         public Button(string text, ButtonType buttonType = ButtonType.Default, ButtonSize buttonSize = ButtonSize.Default,
-            ButtonTag buttonTag = ButtonTag.Button, bool disabled = false, bool block = false, bool submit = true,
-            object htmlAttributes = null)
+            ButtonTag buttonTag = ButtonTag.Button, bool disabled = false, bool block = false, bool submit = true) 
+            : base("button")
         {
             this.text = text;
             this.buttonType = buttonType;
@@ -28,7 +26,6 @@ namespace BootstrapMvc.Base.Button
             this.disabled = disabled;
             this.block = block;
             this.submit = submit;
-            this.htmlAttributes = htmlAttributes;
         }
 
         public Button Type(ButtonType buttonType)
@@ -75,44 +72,44 @@ namespace BootstrapMvc.Base.Button
 
         public override string Render()
         {
-            var wrapper = new TagBuilder("button");
+            //var wrapper = new TagBuilder("button");
 
             // Tag
             switch (buttonTag)
             {
                 case ButtonTag.Link: 
-                    wrapper = new TagBuilder("a");
+                    ChangeWrapperType("a");
                     break;
                 case ButtonTag.Input:
-                    wrapper = new TagBuilder("input");
+                    ChangeWrapperType("input");
                     break;
             }
 
-            wrapper.AddCssClass("btn");
+            Wrapper.AddCssClass("btn");
 
             // Type
             switch (buttonType)
             {
                 case ButtonType.Default:
-                    wrapper.AddCssClass("btn-default");
+                    Wrapper.AddCssClass("btn-default");
                     break;
                 case ButtonType.Primary:
-                    wrapper.AddCssClass("btn-primary");
+                    Wrapper.AddCssClass("btn-primary");
                     break;
                 case ButtonType.Info:
-                    wrapper.AddCssClass("btn-info");
+                    Wrapper.AddCssClass("btn-info");
                     break;
                 case ButtonType.Success:
-                    wrapper.AddCssClass("btn-success");
+                    Wrapper.AddCssClass("btn-success");
                     break;
                 case ButtonType.Warning:
-                    wrapper.AddCssClass("btn-warning");
+                    Wrapper.AddCssClass("btn-warning");
                     break;
                 case ButtonType.Danger:
-                    wrapper.AddCssClass("btn-danger");
+                    Wrapper.AddCssClass("btn-danger");
                     break;
                 case ButtonType.Link:
-                    wrapper.AddCssClass("btn-link");
+                    Wrapper.AddCssClass("btn-link");
                     break;
             }
 
@@ -120,59 +117,38 @@ namespace BootstrapMvc.Base.Button
             switch (buttonSize)
             {
                 case ButtonSize.Large:
-                    wrapper.AddCssClass("btn-lg");
+                    Wrapper.AddCssClass("btn-lg");
                     break;
                 case ButtonSize.Small:
-                    wrapper.AddCssClass("btn-sm");
+                    Wrapper.AddCssClass("btn-sm");
                     break;
                 case ButtonSize.ExtraSmall:
-                    wrapper.AddCssClass("btn-xs");
+                    Wrapper.AddCssClass("btn-xs");
                     break;
             }
 
             if (block)
-                wrapper.AddCssClass("btn-block");
+                Wrapper.AddCssClass("btn-block");
 
             if (disabled)
             {
                 if (buttonTag == ButtonTag.Link)
-                    wrapper.AddCssClass("disabled");
+                    Wrapper.AddCssClass("disabled");
                 else
-                    wrapper.Attributes.Add("disabled", "disabled");
+                    Wrapper.Attributes.Add("disabled", "disabled");
             }
 
             if (submit)
-                wrapper.Attributes.Add("type", "submit");
+                Wrapper.Attributes.Add("type", "submit");
             else
-                wrapper.Attributes.Add("type", "button");
+                Wrapper.Attributes.Add("type", "button");
 
             if (buttonTag == ButtonTag.Input)
-                wrapper.Attributes.Add("value", text);
+                Wrapper.Attributes.Add("value", text);
             else
-                wrapper.InnerHtml = text;
+                Wrapper.InnerHtml = text;
 
-            wrapper.MergeAttributes(htmlAttributes != null ? HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes) : null);
-
-            if (!String.IsNullOrEmpty(css))
-                wrapper.AddCssClass(css);
-
-            return wrapper.ToString();
-        }
-
-        public override Button AddCss(string css)
-        {
-            this.css = css;
-            return this;
-        }
-
-        public override string ToString()
-        {
-            return Render();
-        }
-
-        public string ToHtmlString()
-        {
-            return ToString();
+            return base.Render();
         }
     }
 }

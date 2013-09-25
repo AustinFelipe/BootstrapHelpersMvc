@@ -56,13 +56,11 @@
     <Compile Include="Components\DropdownMenu.cs" />
     <Compile Include="Components\Well.cs" />
     <Compile Include="Extends\CollapsableMenu.cs" />
-    <Compile Include="Helpers\BootstrapMvcHelper.cs" />
-    <Compile Include="Helpers\ButtonHtmlHelper.cs" />
     <Compile Include="Base\Button\ButtonOptions.cs" />
     <Compile Include="Components\ButtonContainer.cs" />
     <Compile Include="Components\ButtonGroup.cs" />
     <Compile Include="Components\ButtonToolbarContainer.cs" />
-    <Compile Include="Helpers\CoreHtmlHelper.cs" />
+    <Compile Include="Helpers\BootstrapHtmlHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
