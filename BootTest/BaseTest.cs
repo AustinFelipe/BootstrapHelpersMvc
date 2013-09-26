@@ -3,6 +3,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BootstrapMvc.Base.Core;
 using BootstrapMvc.Base.Utils;
 using System.Collections.Generic;
+using BootstrapMvc.Components;
+using BootstrapMvc.Extends;
+using BootstrapMvc.Helpers;
 
 namespace BootTest
 {
@@ -125,8 +128,35 @@ namespace BootTest
             Div t = new Div();
 
             t.AddElement(new Element("test"));
+            t.AddElement(new Div());
 
-            Assert.AreEqual("<div><test></test></div>", t.Render(), "There's no test tag inside div");
+            Assert.AreEqual("<div><test></test><div></div></div>", t.Render(), "There's no test tag inside div");
+        }
+
+        [TestMethod]
+        public void Test_CollapsableMenuElement()
+        {
+            CollapsableMenu t = new CollapsableMenu();
+
+            Assert.AreEqual("<div class=\"col-lg-3\"><div class=\"well well-sm\"></div></div>", t.Render());
+        }
+
+        [TestMethod]
+        public void Test_DivElement_With_Static()
+        {
+            Assert.AreEqual("<div></div>", new Bootstrap().Div().Render(), "Static div doens't render a correct html");
+        }
+
+        [TestMethod]
+        public void Test_DivElement_With_CollapsableMenuElement_Inside_Static()
+        {
+            string m = "<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\" id=\"renderContent\"><div class=\"col-lg-3\"><div class=\"well well-sm\"></div></div></div>";
+            
+            Assert.AreEqual(m,
+                new Bootstrap().Div()
+                .Size(new GridResponsive())
+                .AddElement(new CollapsableMenu())
+                .Id("renderContent").Render());    
         }
 
         [TestMethod]
