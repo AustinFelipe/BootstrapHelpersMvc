@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace BootstrapMvc.Base.Core
 {
-    public class Div : Element<Div>
+    public class Div : GenericElement<Div>
     {
         private GridResponsive size { get; set; }
         private bool rowFluid { get; set; }
@@ -40,7 +40,8 @@ namespace BootstrapMvc.Base.Core
 
         public override string Render()
         {
-            Wrapper.AddCssClass(size.ToString());
+            if (!String.IsNullOrEmpty(size.ToString()))
+                Wrapper.AddCssClass(size.ToString());
 
             if (rowFluid)
                 Wrapper.AddCssClass("row");

@@ -1,11 +1,12 @@
 ﻿using BootstrapMvc.Base.Core;
 using System;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
 
 namespace BootstrapMvc.Base.Button
 {
-    public class Button : Element<Button>
+    public class Button : GenericElement<Button>
     {
         private readonly string text;
         private ButtonType buttonType;
