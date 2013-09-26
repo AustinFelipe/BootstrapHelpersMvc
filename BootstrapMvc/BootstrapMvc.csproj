@@ -50,6 +50,7 @@
     <Compile Include="Base\Core\Div.cs" />
     <Compile Include="Base\Core\DivContainer.cs" />
     <Compile Include="Base\Core\Element.cs" />
+    <Compile Include="Base\Core\GenericElement.cs" />
     <Compile Include="Base\Core\IElement.cs" />
     <Compile Include="Base\Utils\GridSystem.cs" />
     <Compile Include="Components\ButtonToolbar.cs" />

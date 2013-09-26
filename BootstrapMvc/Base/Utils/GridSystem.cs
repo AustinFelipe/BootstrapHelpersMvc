@@ -42,7 +42,8 @@ namespace BootstrapMvc.Base.Utils
 
             foreach (var item in this)
             {
-                classPrefix += String.Format(" {0}", GridUtils.GetClassPrefix(item.GridType, item.Size));
+                classPrefix += String.Format(String.IsNullOrEmpty(classPrefix) ? "{0}" : " {0}", 
+                    GridUtils.GetClassPrefix(item.GridType, item.Size));
             }
 
             return classPrefix;
@@ -51,6 +52,31 @@ namespace BootstrapMvc.Base.Utils
 
     public static class GridUtils
     {
+        /// <summary>
+        /// Return a GridResponsive system based on params 
+        /// </summary>
+        /// <param name="extraSmallSize">Size to extra small devices</param>
+        /// <param name="smallSize">Size to small devices</param>
+        /// <param name="mediumSize">Size to medium devices</param>
+        /// <param name="largeSize">Size to large devices</param>
+        /// <returns></returns>
+        public static GridResponsive FormatGrid(int extraSmallSize = 0, int smallSize = 0, int mediumSize = 0,
+            int largeSize = 0)
+        {
+            GridResponsive t = GridResponsive.GridResponsiveWithoutCol();
+
+            if (extraSmallSize > 0)
+                t.Add(new GridCol() { GridType = GridOptions.ExtraSmallDevices, Size = extraSmallSize });
+            if (smallSize > 0)
+                t.Add(new GridCol() { GridType = GridOptions.SmallDevices, Size = smallSize });
+            if (mediumSize > 0)
+                t.Add(new GridCol() { GridType = GridOptions.MediumDevices, Size = mediumSize });
+            if (largeSize > 0)
+                t.Add(new GridCol() { GridType = GridOptions.LargeDevices, Size = largeSize });
+            
+            return t;
+        }
+
         public static string GetClassPrefix(GridOptions gridOption, int size)
         {
             string classPrefix = String.Empty;
